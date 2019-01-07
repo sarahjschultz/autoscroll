@@ -1,7 +1,6 @@
 {
   "name": "@sarahjschultz/autoscroll",
-  "version": "0.0.1-beta",
-  "private": false,
+  "version": "0.0.3-beta",
   "license": "MIT",
   "description": "Autoscroll with no opinions.",
   "author": "Sarah Schultz",
@@ -24,5 +23,8 @@
   "scripts": {
     "test": "jasmine"
   },
-  "main": "autoscroll.js"
+  "main": "autoscroll.js",
+  "devDependencies": {
+    "jasmine": "^3.3.1"
+  }
 }
