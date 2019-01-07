@@ -1,0 +1,28 @@
+{
+  "name": "autoscroll",
+  "version": "0.0.1-beta",
+  "private": false,
+  "license": "MIT",
+  "description": "Autoscroll with no opinions.",
+  "author": "Sarah Schultz",
+  "homepage": "https://github.com/sarahjschultz/autoscroll#readme",
+  "repository": "https://github.com/sarahjschultz/autoscroll",
+  "contributors": [
+    {
+      "name": "Sarah Schultz",
+      "email": "sarahjschultz@gmail.com"
+    }
+  ],
+  "bugs": {
+    "url": "https://github.com/sarahjschultz/autoscroll/issues"
+  },
+  "keywords": [
+    "autoscroll",
+    "drag-and-drop",
+    "es6"
+  ],
+  "scripts": {
+    "test": "jasmine"
+  },
+  "main": "autoscroll.js"
+}

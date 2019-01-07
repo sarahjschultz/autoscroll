@@ -1,2 +1,2 @@
-# autoscroll
-Lightweight autoscroll for multiple coordinate systems
+# autoscroll.js
+AutoScroll with no opinions.
