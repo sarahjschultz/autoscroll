@@ -13,7 +13,7 @@ const AutoScroll = {
     this.setRecursionDelay(recursionDelay);
     this.setScrollDistance(scrollDistance);
 
-    this.scrollableContainer.addEventListener("mouseenter", (evt) => {
+    this.scrollableContainer.addEventListener("mousemove", (evt) => {
       this.scroll(evt);
     });
     this.scrollableContainer.addEventListener("mouseout", () => {
