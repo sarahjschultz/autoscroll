@@ -54,7 +54,7 @@ const AutoScroll = {
     const leftOfRed = this.scrollableContainer.offsetLeft;
     const rightOfRed = this.scrollableContainer.offsetLeft + this.scrollableContainer.offsetWidth;
 
-    /* if my mouse is close to the bottom, scroll down*/
+    // if event occurs close to the bottom, scroll down
     if (redCoordsClickY >= bottomOfRed - this.scrollThreshhold) {
       clearInterval(this.timerId);
       this.timerId = setTimeout(function scrollBottom() {
@@ -64,7 +64,7 @@ const AutoScroll = {
       }, AutoScroll.recursionDelay);
     }
 
-    /*   if my mouse is close to the top, scroll up*/
+    //   if event occurs close to the top, scroll up
     if (redCoordsClickY <= topOfRed + this.scrollThreshhold) {
       clearInterval(this.timerId);
       this.timerId = setTimeout(function scrollTop() {
@@ -74,7 +74,7 @@ const AutoScroll = {
       }, AutoScroll.recursionDelay);
     }
 
-    /*   if my mouse is close to the left, scroll left*/
+    //   if event occurs close to the left, scroll left
     if (redCoordsClickX <= leftOfRed + this.scrollThreshhold) {
       clearInterval(this.timerId);
       this.timerId = setTimeout(function scrollLeft() {
@@ -84,7 +84,7 @@ const AutoScroll = {
       }, AutoScroll.recursionDelay);
     }
 
-    /*   if my mouse is close to the right, scroll right*/
+    //   if event occurs close to the right, scroll right
     if (redCoordsClickX >= rightOfRed - this.scrollThreshhold) {
       clearInterval(AutoScroll.timerId);
       AutoScroll.timerId = setTimeout(function scrollRight() {
