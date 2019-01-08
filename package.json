@@ -1,16 +1,16 @@
 {
-  "name": "@sarahjschultz/autoscroll",
+  "name": "autoscroll-without-opinions",
   "version": "0.0.3-beta",
   "license": "MIT",
   "description": "Autoscroll with no opinions.",
   "author": "Sarah Schultz",
   "homepage": "https://github.com/sarahjschultz/autoscroll#readme",
-  "repository": "https://github.com/sarahjschultz/autoscroll",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sarahjschultz/autoscroll.git"
+  },
   "contributors": [
-    {
-      "name": "Sarah Schultz",
-      "email": "sarahjschultz@gmail.com"
-    }
+    "Sarah Schultz <sarah@productplan.com>"
   ],
   "bugs": {
     "url": "https://github.com/sarahjschultz/autoscroll/issues"
@@ -26,5 +26,6 @@
   "main": "autoscroll.js",
   "devDependencies": {
     "jasmine": "^3.3.1"
-  }
+  },
+  "dependencies": {}
 }
