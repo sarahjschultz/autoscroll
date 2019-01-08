@@ -23,7 +23,7 @@
   "scripts": {
     "test": "jasmine"
   },
-  "main": "autoscroll.js",
+  "main": "index.js",
   "devDependencies": {
     "jasmine": "^3.3.1"
   },
