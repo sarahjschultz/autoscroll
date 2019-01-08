@@ -1,4 +1,4 @@
-export default class AutoScroll {
+class AutoScroll {
   constructor(options = {}){
     this.timerId = null;
     this.setScrollableContainer(options.scrollableContainer);
@@ -6,10 +6,6 @@ export default class AutoScroll {
     this.setRecursionDelay(options.recursionDelay);
     this.setScrollDistance(options.scrollDistance);
 
-    clearInterval(this.timerId);
-    this.scrollableContainer.addEventListener("mousemove", (evt) => {
-      this.scroll(evt);
-    });
     this.scrollableContainer.addEventListener("mouseout", () => {
       this.reset();
     });
@@ -107,3 +103,5 @@ export default class AutoScroll {
     this.timerId = null;
   }
 }
+
+export default AutoScroll;
