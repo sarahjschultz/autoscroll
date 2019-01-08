@@ -1,4 +1,4 @@
-class AutoScroll {
+export default class AutoScroll {
   constructor(options = {}){
     this.timerId = null;
     this.setScrollableContainer(options.scrollableContainer);
@@ -103,5 +103,3 @@ class AutoScroll {
     this.timerId = null;
   }
 }
-
-export default AutoScroll;

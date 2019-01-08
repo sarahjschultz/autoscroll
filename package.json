@@ -1,6 +1,6 @@
 {
   "name": "autoscroll-without-opinions",
-  "version": "0.0.6-beta",
+  "version": "0.0.7-beta",
   "license": "MIT",
   "description": "Autoscroll with no opinions.",
   "author": "Sarah Schultz",
@@ -23,7 +23,7 @@
   "scripts": {
     "test": "jasmine"
   },
-  "main": "src/index.js",
+  "main": "src/autoscroll.js",
   "devDependencies": {
     "jasmine": "^3.3.1"
   },
