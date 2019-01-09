@@ -7,6 +7,10 @@ const AutoScroll = {
     this.setRecursionDelay(options.recursionDelay);
     this.setScrollDistance(options.scrollDistance);
     this.edgeDetector = new EdgeDetector(options);
+
+    this.scrollableContainer.addEventListener("mouseout", () => {
+      clearInterval(this.timerId);
+    });
   },
 
   // Container to scroll in autoScroll event

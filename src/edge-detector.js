@@ -20,10 +20,13 @@ export default class EdgeDetector {
   setBottomEdge(options) {
     this.bottomEdge = this.computeBottomEdge(options.scrollableContainer);
   }
+
   setRightEdge(options) {
     this.rightEdge = this.computeRightEdge(options.scrollableContainer);
   }
 
+  // Compute various positioning values to support
+  // the edge detection
   computeRightEdge(container) {
     return this.leftEdge + container.offsetWidth;
   }
@@ -54,36 +57,26 @@ export default class EdgeDetector {
     return left >= 0 ? left : 0;
   }
 
-  // Translate event coordinates from document coordinates to
-  // scrollContainer coordinates, if necessary
-  // If scrollContainer is not passed, this val is the document and math is moot
   translateEventCoords(event) {
-    this.translateEventX(event.pageX);
-    this.translateEventY(event.pageY);
-  }
-
-  translateEventX(documentCoordX) {
-    this.containerX = documentCoordX - this.leftEdge;
-  }
-
-  translateEventY(documentCoordY) {
-    this.containerY = documentCoordY - this.topEdge;
+    this.eventX = event.pageX;
+    this.eventY = event.pageY;
   }
 
   // Boundary detection
   eventWithinThreshholdFromRight() {
-    return this.containerX >= this.rightEdge - this.marginFromEdge;
+    // containerX in
+    return this.eventX >= this.rightEdge - this.marginFromEdge;
   }
 
   eventWithinThreshholdFromLeft(){
-    return this.containerX <= this.leftEdge + this.marginFromEdge;
+    return this.eventX <= this.leftEdge + this.marginFromEdge;
   }
 
   eventWithinThreshholdFromTop(){
-    return this.containerY <= this.topEdge + this.marginFromEdge;
+    return this.eventY <= this.topEdge + this.marginFromEdge;
   }
 
   eventWithinThreshholdFromBottom() {
-    return this.containerY >= this.bottomEdge - this.marginFromEdge;
+    return this.eventY >= this.bottomEdge - this.marginFromEdge;
   }
 }
