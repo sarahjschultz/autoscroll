@@ -2,9 +2,10 @@ export default class EdgeDetector {
   constructor(options = {}) {
     this.marginFromEdge = options.scrollThreshhold || 30;
     this.setLeftEdge(options);
-    this.setRightEdge(options);
     this.setTopEdge(options);
+
     this.setBottomEdge(options);
+    this.setRightEdge(options);
   }
 
   // Set edges
@@ -12,24 +13,23 @@ export default class EdgeDetector {
     this.leftEdge = options.hasOwnProperty('offsetOverrideLeft') ? options.offsetOverrideLeft : options.scrollableContainer.offsetLeft;
   }
 
-  setRightEdge(options) {
-    this.rightEdge = options.hasOwnProperty('offsetOverrideRight') ? options.offsetOverrideRight : this.computeRightEdge(options.scrollableContainer);
-  }
-
   setTopEdge(options) {
     this.topEdge = options.hasOwnProperty('offsetOverrideTop') ? options.offsetOverrideTop : options.scrollableContainer.offsetTop;
   }
 
   setBottomEdge(options) {
-    this.bottomEdge = options.hasOwnProperty('offsetOverrideBottom') ? options.offsetOverrideBottom : this.computeBottomEdge(options.scrollableContainer);
+    this.bottomEdge = this.computeBottomEdge(options.scrollableContainer);
+  }
+  setRightEdge(options) {
+    this.rightEdge = this.computeRightEdge(options.scrollableContainer);
   }
 
   computeRightEdge(container) {
-    return container.offsetLeft + container.offsetWidth;
+    return this.leftEdge + container.offsetWidth;
   }
 
   computeBottomEdge(container) {
-    return container.offsetTop + container.offsetHeight;
+    return this.topEdge + container.offsetHeight;
   }
 
   // Translate event coordinates from document coordinates to
