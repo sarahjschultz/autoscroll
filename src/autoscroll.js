@@ -1,6 +1,6 @@
 import EdgeDetector from "./edge-detector";
 
-export const AutoScroll = {
+const AutoScroll = {
   initialize(options = {}){
     this.timerId = null;
     this.setScrollableContainer(options.scrollableContainer);
@@ -83,3 +83,5 @@ export const AutoScroll = {
     delete this.edgeDetector;
   }
 };
+
+export default AutoScroll;
