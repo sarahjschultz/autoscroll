@@ -1,6 +1,6 @@
 export default class EdgeDetector {
   constructor(options = {}) {
-    this.marginFromEdge = options.scrollThreshhold || 30;
+    this.marginFromEdge = options.scrollThreshhold >= 0 ? options.scrollThreshhold : 30;
     this.setLeftEdge(options);
     this.setTopEdge(options);
 
@@ -10,11 +10,11 @@ export default class EdgeDetector {
 
   // Set edges
   setLeftEdge(options) {
-    this.leftEdge = options.hasOwnProperty('offsetOverrideLeft') ? options.offsetOverrideLeft : options.scrollableContainer.offsetLeft;
+    this.leftEdge =  this.computeOffsetLeftFromDocument(options.scrollableContainer);
   }
 
   setTopEdge(options) {
-    this.topEdge = options.hasOwnProperty('offsetOverrideTop') ? options.offsetOverrideTop : options.scrollableContainer.offsetTop;
+    this.topEdge = this.computeOffsetTopFromDocument(options.scrollableContainer);
   }
 
   setBottomEdge(options) {
@@ -30,6 +30,28 @@ export default class EdgeDetector {
 
   computeBottomEdge(container) {
     return this.topEdge + container.offsetHeight;
+  }
+
+  computeOffsetTopFromDocument(elem) {
+    let top = 0;
+    if (elem.offsetParent) {
+      do {
+        top += elem.offsetTop;
+        elem = elem.offsetParent;
+      } while (elem);
+    }
+    return top >= 0 ? top : 0;
+  }
+
+  computeOffsetLeftFromDocument(elem) {
+    let left = 0;
+    if (elem.offsetParent) {
+      do {
+        left += elem.offsetLeft;
+        elem = elem.offsetParent;
+      } while (elem);
+    }
+    return left >= 0 ? left : 0;
   }
 
   // Translate event coordinates from document coordinates to
