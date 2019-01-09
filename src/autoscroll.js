@@ -38,10 +38,10 @@ const AutoScroll = {
 
     clearInterval(self.timerId);
     // Event location in document coordinates
-    this.edgeDetector.translateEventCoords(event);
+    self.edgeDetector.translateEventCoords(event);
 
     // if event occurs close to the bottom, scroll down
-    if (this.edgeDetector.eventWithinThreshholdFromBottom()) {
+    if (self.edgeDetector.eventWithinThreshholdFromBottom()) {
       clearInterval(self.timerId);
       self.timerId = setTimeout(function scrollBottom() {
         clearInterval(self.timerId);
@@ -51,7 +51,7 @@ const AutoScroll = {
     }
 
     // if event occurs close to the top, scroll up
-    if (this.edgeDetector.eventWithinThreshholdFromTop()) {
+    if (self.edgeDetector.eventWithinThreshholdFromTop()) {
       clearInterval(self.timerId);
       self.timerId = setTimeout(function scrollTop() {
         clearInterval(self.timerId);
@@ -71,11 +71,11 @@ const AutoScroll = {
     }
 
     //   if event occurs close to the right, scroll right
-    if (this.edgeDetector.eventWithinThreshholdFromRight()) {
+    if (self.edgeDetector.eventWithinThreshholdFromRight()) {
       clearInterval(self.timerId);
       self.timerId = setTimeout(function scrollRight() {
         clearInterval(self.timerId);
-        self.scrollableContainer.scrollBy(this.scrollDistance, 0);
+        self.scrollableContainer.scrollBy(self.scrollDistance, 0);
         self.timerId = setTimeout(scrollRight, self.recursionDelay);
       }, self.recursionDelay);
     }
