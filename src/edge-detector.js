@@ -64,7 +64,6 @@ export default class EdgeDetector {
 
   // Boundary detection
   eventWithinThreshholdFromRight() {
-    // containerX in
     return this.eventX >= this.rightEdge - this.marginFromEdge;
   }
 
@@ -78,5 +77,21 @@ export default class EdgeDetector {
 
   eventWithinThreshholdFromBottom() {
     return this.eventY >= this.bottomEdge - this.marginFromEdge;
+  }
+
+  eventWithinBottomLeftThreshhold() {
+    return this.eventWithinThreshholdFromLeft() && this.eventWithinThreshholdFromBottom();
+  }
+
+  eventWithinBottomRightThreshhold() {
+    return this.eventWithinThreshholdFromRight() && this.eventWithinThreshholdFromBottom();
+  }
+
+  eventWithinTopRightThreshhold() {
+    return this.eventWithinThreshholdFromRight() && this.eventWithinThreshholdFromTop();
+  }
+
+  eventWithinTopLeftThreshhold() {
+    return this.eventWithinThreshholdFromLeft() && this.eventWithinThreshholdFromTop();
   }
 }

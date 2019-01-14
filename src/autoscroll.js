@@ -79,6 +79,46 @@ const AutoScroll = {
         self.timerId = setTimeout(scrollRight, self.recursionDelay);
       }, self.recursionDelay);
     }
+
+    //   if event occurs close to the top-right, scroll top-right
+    if (self.edgeDetector.eventWithinTopRightThreshhold()) {
+      clearInterval(self.timerId);
+      self.timerId = setTimeout(function scrollTopRight() {
+        clearInterval(self.timerId);
+        self.scrollableContainer.scrollBy(self.scrollDistance, -self.scrollDistance);
+        self.timerId = setTimeout(scrollTopRight, self.recursionDelay);
+      }, self.recursionDelay);
+    }
+
+    //   if event occurs close to the top-left, scroll top-left
+    if (self.edgeDetector.eventWithinTopLeftThreshhold()) {
+      clearInterval(self.timerId);
+      self.timerId = setTimeout(function scrollTopLeft() {
+        clearInterval(self.timerId);
+        self.scrollableContainer.scrollBy(-self.scrollDistance, -self.scrollDistance);
+        self.timerId = setTimeout(scrollTopLeft, self.recursionDelay);
+      }, self.recursionDelay);
+    }
+
+    //   if event occurs close to the bottom-left, scroll bottom-left
+    if (self.edgeDetector.eventWithinBottomLeftThreshhold()) {
+      clearInterval(self.timerId);
+      self.timerId = setTimeout(function scrollBottomLeft() {
+        clearInterval(self.timerId);
+        self.scrollableContainer.scrollBy(-self.scrollDistance, self.scrollDistance);
+        self.timerId = setTimeout(scrollBottomLeft, self.recursionDelay);
+      }, self.recursionDelay);
+    }
+
+    //   if event occurs close to the bottom-right, scroll bottom-right
+    if (self.edgeDetector.eventWithinBottomRightThreshhold()) {
+      clearInterval(self.timerId);
+      self.timerId = setTimeout(function scrollBottomRight() {
+        clearInterval(self.timerId);
+        self.scrollableContainer.scrollBy(self.scrollDistance, self.scrollDistance);
+        self.timerId = setTimeout(scrollBottomRight, self.recursionDelay);
+      }, self.recursionDelay);
+    }
   },
 
   reset() {
