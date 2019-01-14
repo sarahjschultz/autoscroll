@@ -35,6 +35,8 @@ const AutoScroll = {
 
   scroll(event) {
     const self = this;
+    let scrollYBy = 0;
+    let scrollXBy = 0;
 
     clearInterval(self.timerId);
     // Event location in document coordinates
@@ -42,83 +44,30 @@ const AutoScroll = {
 
     // if event occurs close to the bottom, scroll down
     if (self.edgeDetector.eventWithinThreshholdFromBottom()) {
-      clearInterval(self.timerId);
-      self.timerId = setTimeout(function scrollBottom() {
-        clearInterval(self.timerId);
-        self.scrollableContainer.scrollBy(0, self.scrollDistance);
-        self.timerId = setTimeout(scrollBottom, self.recursionDelay);
-      }, self.recursionDelay);
+      scrollYBy = self.scrollDistance;
     }
 
     // if event occurs close to the top, scroll up
     if (self.edgeDetector.eventWithinThreshholdFromTop()) {
-      clearInterval(self.timerId);
-      self.timerId = setTimeout(function scrollTop() {
-        clearInterval(self.timerId);
-        self.scrollableContainer.scrollBy(0, -self.scrollDistance);
-        self.timerId = setTimeout(scrollTop, self.recursionDelay);
-      }, self.recursionDelay);
+      scrollYBy = -self.scrollDistance;
     }
 
     //   if event occurs close to the left, scroll left
     if (this.edgeDetector.eventWithinThreshholdFromLeft()) {
-      clearInterval(self.timerId);
-      self.timerId = setTimeout(function scrollLeft() {
-        clearInterval(self.timerId);
-        self.scrollableContainer.scrollBy(-self.scrollDistance, 0);
-        self.timerId = setTimeout(scrollLeft, self.recursionDelay);
-      }, self.recursionDelay);
+      scrollXBy = -self.scrollDistance;
     }
 
     //   if event occurs close to the right, scroll right
     if (self.edgeDetector.eventWithinThreshholdFromRight()) {
-      clearInterval(self.timerId);
-      self.timerId = setTimeout(function scrollRight() {
-        clearInterval(self.timerId);
-        self.scrollableContainer.scrollBy(self.scrollDistance, 0);
-        self.timerId = setTimeout(scrollRight, self.recursionDelay);
-      }, self.recursionDelay);
+      scrollXBy = self.scrollDistance;
     }
 
-    //   if event occurs close to the top-right, scroll top-right
-    if (self.edgeDetector.eventWithinTopRightThreshhold()) {
+    clearInterval(self.timerId);
+    self.timerId = setTimeout(function scrollContainer() {
       clearInterval(self.timerId);
-      self.timerId = setTimeout(function scrollTopRight() {
-        clearInterval(self.timerId);
-        self.scrollableContainer.scrollBy(self.scrollDistance, -self.scrollDistance);
-        self.timerId = setTimeout(scrollTopRight, self.recursionDelay);
-      }, self.recursionDelay);
-    }
-
-    //   if event occurs close to the top-left, scroll top-left
-    if (self.edgeDetector.eventWithinTopLeftThreshhold()) {
-      clearInterval(self.timerId);
-      self.timerId = setTimeout(function scrollTopLeft() {
-        clearInterval(self.timerId);
-        self.scrollableContainer.scrollBy(-self.scrollDistance, -self.scrollDistance);
-        self.timerId = setTimeout(scrollTopLeft, self.recursionDelay);
-      }, self.recursionDelay);
-    }
-
-    //   if event occurs close to the bottom-left, scroll bottom-left
-    if (self.edgeDetector.eventWithinBottomLeftThreshhold()) {
-      clearInterval(self.timerId);
-      self.timerId = setTimeout(function scrollBottomLeft() {
-        clearInterval(self.timerId);
-        self.scrollableContainer.scrollBy(-self.scrollDistance, self.scrollDistance);
-        self.timerId = setTimeout(scrollBottomLeft, self.recursionDelay);
-      }, self.recursionDelay);
-    }
-
-    //   if event occurs close to the bottom-right, scroll bottom-right
-    if (self.edgeDetector.eventWithinBottomRightThreshhold()) {
-      clearInterval(self.timerId);
-      self.timerId = setTimeout(function scrollBottomRight() {
-        clearInterval(self.timerId);
-        self.scrollableContainer.scrollBy(self.scrollDistance, self.scrollDistance);
-        self.timerId = setTimeout(scrollBottomRight, self.recursionDelay);
-      }, self.recursionDelay);
-    }
+      self.scrollableContainer.scrollBy(scrollXBy, scrollYBy);
+      self.timerId = setTimeout(scrollContainer, self.recursionDelay);
+    }, self.recursionDelay);
   },
 
   reset() {
