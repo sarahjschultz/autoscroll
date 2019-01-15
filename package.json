@@ -27,9 +27,9 @@
   "scripts": {
     "build": "cross-env BABEL_ENV=production babel src --out-dir lib",
     "clean": "rimraf lib",
-    "cover": "istanbul cover _mocha -- --require babel-core/register --require babel-polyfill --recursive",
+    "cover": "istanbul cover _mocha -- --require babel-core/register --require babel-polyfill",
     "prepublish": "npm run clean && npm run build",
-    "test": "npm run lint && npm run cover"
+    "test": "mocha"
   },
   "main": "./lib/index.js",
   "devDependencies": {
