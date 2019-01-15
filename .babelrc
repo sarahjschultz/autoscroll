@@ -9,8 +9,12 @@
     "production": {
       "presets": ["env", "minify"],
       "plugins": [
-        "add-module-exports"
+        "add-module-exports",
+        "transform-es2015-modules-commonjs"
       ]
+    },
+    "test": {
+      "plugins": ["transform-es2015-modules-commonjs"]
     }
   }
 }

@@ -1,5 +1,7 @@
 export default class EdgeDetector {
   constructor(options = {}) {
+    if (options.length === 0) return;
+
     this.marginFromEdge = options.scrollThreshhold >= 0 ? options.scrollThreshhold : 30;
     this.setLeftEdge(options);
     this.setTopEdge(options);

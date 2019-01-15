@@ -3,9 +3,9 @@ import EdgeDetector from "./edge-detector";
 const AutoScroll = {
   initialize(options = {}){
     this.timerId = null;
-    this.setScrollableContainer(options.scrollableContainer);
-    this.setRecursionDelay(options.recursionDelay);
-    this.setScrollDistance(options.scrollDistance);
+    this.setScrollableContainer(options);
+    this.setRecursionDelay(options);
+    this.setScrollDistance(options);
     this.edgeDetector = new EdgeDetector(options);
 
     this.scrollableContainer.addEventListener("mouseout", () => {
@@ -15,22 +15,22 @@ const AutoScroll = {
 
   // Container to scroll in autoScroll event
   // All offsets + threshholds measured from this
-  setScrollableContainer(container){
+  setScrollableContainer(options){
     // Add guards for type before setting
-    this.scrollableContainer = container || document.documentElement;
+    this.scrollableContainer = options.scrollableContainer || document.documentElement;
   },
 
   // Milliseconds
-  setRecursionDelay(delay){
+  setRecursionDelay(options){
     // Add guards for type before setting
-    this.recursionDelay = delay || 50;
+    this.recursionDelay = options.recursionDelay || 50;
   },
 
   // Distance autoScroller should increase scroll, each call
   // Measured in pixels
-  setScrollDistance(distance){
+  setScrollDistance(options){
     // Add guards for type before setting
-    this.scrollDistance = distance || 10;
+    this.scrollDistance = options.scrollDistance || 10;
   },
 
   scroll(event) {
@@ -73,6 +73,7 @@ const AutoScroll = {
   reset() {
     clearInterval(this.timerId);
     this.timerId = null;
+    this.scrollableContainer = this.scrollDistance = this.recursionDelay = null;
     delete this.edgeDetector;
   }
 };
