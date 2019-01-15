@@ -1,5 +1,8 @@
 [![Build Status](https://travis-ci.com/sarahjschultz/autoscroll-without-opinions.svg?branch=master)](https://travis-ci.com/sarahjschultz/autoscroll-without-opinions)
 [![codecov](https://codecov.io/gh/sarahjschultz/autoscroll-without-opinions/branch/master/graph/badge.svg)](https://codecov.io/gh/sarahjschultz/autoscroll-without-opinions)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
+
 
 # autoscroll-without-opinions
 The AutoScroll module you didn't know you needed until you did.
