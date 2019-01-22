@@ -11,7 +11,5 @@ test
 examples
 CHANGELOG.md
 .travis.yml
-.eslintignore
-.eslintrc
 .babelrc
 .gitignore
