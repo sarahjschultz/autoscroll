@@ -30,33 +30,25 @@ export default class EdgeDetector {
   // Compute various positioning values to support
   // the edge detection
   computeRightEdge(container) {
-    return this.leftEdge + container.offsetWidth;
+    return parseInt(this.leftEdge + container.offsetWidth);
   }
 
   computeBottomEdge(container) {
-    return this.topEdge + container.offsetHeight;
+    return parseInt(this.topEdge + container.offsetHeight);
   }
 
   computeOffsetTopFromDocument(elem) {
-    let top = 0;
-    if (elem.offsetParent) {
-      do {
-        top += elem.offsetTop;
-        elem = elem.offsetParent;
-      } while (elem);
+    if (!elem.offsetParent) {
+      return elem.offsetTop
     }
-    return top >= 0 ? top : 0;
+    return elem.offsetTop + this.computeOffsetTopFromDocument(elem.offsetParent);
   }
 
   computeOffsetLeftFromDocument(elem) {
-    let left = 0;
-    if (elem.offsetParent) {
-      do {
-        left += elem.offsetLeft;
-        elem = elem.offsetParent;
-      } while (elem);
+    if (!elem.offsetParent) {
+      return elem.offsetLeft
     }
-    return left >= 0 ? left : 0;
+    return elem.offsetLeft + this.computeOffsetLeftFromDocument(elem.offsetParent);
   }
 
   translateEventCoords(event) {
