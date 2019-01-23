@@ -4,16 +4,16 @@
   "license": "MIT",
   "description": "Autoscroll with no opinions.",
   "author": "Sarah Schultz",
-  "homepage": "https://github.com/sarahjschultz/autoscroll#readme",
+  "homepage": "https://github.com/sarahjschultz/autoscroll-without-opinions#readme",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/sarahjschultz/autoscroll.git"
+    "url": "git+https://github.com/sarahjschultz/autoscroll-without-opinions.git"
   },
   "contributors": [
     "Sarah Schultz <sarah@productplan.com>"
   ],
   "bugs": {
-    "url": "https://github.com/sarahjschultz/autoscroll/issues"
+    "url": "https://github.com/sarahjschultz/autoscroll-without-opinions/issues"
   },
   "files": [
     "lib",
