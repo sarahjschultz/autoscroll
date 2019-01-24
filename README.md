@@ -7,11 +7,32 @@
 # autoscroll-without-opinions
 The AutoScroll module you didn't know you needed until you did.
 
-# VIP NOTE
-This lib is still experimental so please only download at your own risk -- I will tag the release as stable when the interface is unlikely to change further.
+Get complete control over the scrolling container, sensitivity threshhold, recursion speed and more with a simple plug-and-play autoscroll solution!
 
-# Docs
-Stay tuned for docs you did know you needed but didn't have because I haven't written them yet.
+Good for:
+- People who think browser geometry is boring
+- Teams who can't yet migrate off of jqueryUI Draggable but also can't use their autoscroll solution
+- People who are my friends
 
-# Tests
-Tests or perish <no but I also need to check these in>
+## Table of Contents
+
+- [Install](#install)
+- [Docs](#documentation)
+- [Contributing](#contributing)
+
+# Install
+You can install the library via npm:
+
+`npm i autoscroll-without-opinions`
+
+or via yarn:
+
+`yarn add autoscroll-without-opinions`
+
+Choose your own adventure!
+
+# Documentation
+Stay tuned for docs you did know you need but don't have because I haven't written them yet.
+
+# Contributing
+Contributions are more than welcome, if you're nice. If you're not nice, bai. Niceness is wholly and eternally determined by me, Sarah A. Nice.
