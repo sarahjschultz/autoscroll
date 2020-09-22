@@ -50,5 +50,8 @@
     "jest": "^23.6.0",
     "regenerator-runtime": "^0.13.1",
     "rimraf": "^2.6.2"
+  },
+  "dependencies": {
+    "smoothscroll-polyfill": "^0.4.4"
   }
 }
