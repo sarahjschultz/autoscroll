@@ -1,8 +1,8 @@
-import AutoScroll   from "../src/autoscroll";
+import AutoScroll from "../src/autoscroll";
 import EdgeDetector from "../src/edge-detector";
-jest.mock('../src/edge-detector');
+jest.mock("../src/edge-detector");
 
-describe('AutoScroll', () => {
+describe("AutoScroll", () => {
   beforeEach(() => {
     EdgeDetector.mockClear();
   });
@@ -21,10 +21,6 @@ describe('AutoScroll', () => {
         expect(AutoScroll.scrollableContainer).toBe(document.documentElement);
       });
 
-      it("sets the default recursionDelay to 50 ms", () => {
-        expect(AutoScroll.recursionDelay).toBe(50);
-      });
-
       it("sets the default scrollDistance to 10 (pixels)", () => {
         expect(AutoScroll.scrollDistance).toBe(10);
       });
@@ -35,15 +31,13 @@ describe('AutoScroll', () => {
     });
 
     describe("with options specified", () => {
-      let scrollContainer, recursionVal, distanceVal, options;
+      let scrollContainer, distanceVal, options;
       beforeEach(() => {
         scrollContainer = "Yo dawg I heard you like scrollin";
-        recursionVal = "We put a scroll in your scroll";
         distanceVal = "So you can scroll while you scroll";
         options = {
           scrollableContainer: scrollContainer,
-          recursionDelay: recursionVal,
-          scrollDistance: distanceVal
+          scrollDistance: distanceVal,
         };
         AutoScroll.initialize(options);
       });
@@ -53,10 +47,6 @@ describe('AutoScroll', () => {
 
       it("sets the scrollableContainer from options hash", () => {
         expect(AutoScroll.scrollableContainer).toBe(scrollContainer);
-      });
-
-      it("sets the recursionVal from options hash", () => {
-        expect(AutoScroll.recursionDelay).toBe(recursionVal);
       });
 
       it("sets the scrollDistance from options hash", () => {
@@ -89,7 +79,7 @@ describe('AutoScroll', () => {
       beforeEach(() => {
         scrollCont = "Yo dawg I heard you like scrollin";
         options = {
-          scrollableContainer: scrollCont
+          scrollableContainer: scrollCont,
         };
         AutoScroll.setScrollableContainer(options);
       });
@@ -99,40 +89,6 @@ describe('AutoScroll', () => {
 
       it("sets the value of the scrollableContainer to the container argument", () => {
         expect(AutoScroll.scrollableContainer).toBe(scrollCont);
-      });
-    });
-  });
-
-  describe("#setRecursionDelay()", () => {
-    describe("with no recursionDelay specified", () => {
-      let options;
-      beforeEach(() => {
-        options = {};
-        AutoScroll.setRecursionDelay(options);
-      });
-      afterEach(() => {
-        AutoScroll.reset();
-      });
-
-      it("sets the default value of recursionDelay to the default 50 ms", () => {
-        expect(AutoScroll.recursionDelay).toBe(50);
-      });
-    });
-    describe("with a recursionDelay specified", () => {
-      let options, delay;
-      beforeEach(() => {
-        delay = 4444111000;
-        options = {
-          recursionDelay: delay
-        };
-        AutoScroll.setRecursionDelay(options);
-      });
-      afterEach(() => {
-        AutoScroll.reset();
-      });
-
-      it("sets the value of recursionDelay to the delay argument", () => {
-        expect(AutoScroll.recursionDelay).toBe(delay);
       });
     });
   });
@@ -157,7 +113,7 @@ describe('AutoScroll', () => {
       beforeEach(() => {
         distance = 222222212;
         options = {
-          scrollDistance: distance
+          scrollDistance: distance,
         };
         AutoScroll.setScrollDistance(options);
       });
@@ -172,40 +128,26 @@ describe('AutoScroll', () => {
   });
 
   describe("#reset()", () => {
-    let scrollContainer, recursionVal, distanceVal, options, punchline;
+    let scrollContainer, distanceVal, options, punchline;
     beforeEach(() => {
       scrollContainer = "Yo dawg I heard you like scrollin";
-      recursionVal = "We put a scroll in your scroll";
       distanceVal = "So you can scroll while you scroll";
       options = {
         scrollableContainer: scrollContainer,
-        recursionDelay: recursionVal,
-        scrollDistance: distanceVal
+        scrollDistance: distanceVal,
       };
       AutoScroll.initialize(options);
       punchline = "Why did the chicken cross the road?";
-      AutoScroll.timerId = punchline;
     });
 
     afterEach(() => {
       AutoScroll.reset();
     });
 
-    it("resets any timerId set by various timing functions", () => {
-      expect(AutoScroll.timerId).toBe(punchline);
-      AutoScroll.reset();
-      expect(AutoScroll.timerId).toBe(null);
-    });
     it("resets the container values to null", () => {
       expect(AutoScroll.scrollableContainer).toBe(scrollContainer);
       AutoScroll.reset();
       expect(AutoScroll.scrollableContainer).toBe(null);
-    });
-
-    it("resets the recursion values to null", () => {
-      expect(AutoScroll.recursionDelay).toBe(recursionVal);
-      AutoScroll.reset();
-      expect(AutoScroll.recursionDelay).toBe(null);
     });
 
     it("resets the scrollDistance values to null", () => {
@@ -229,10 +171,11 @@ describe('AutoScroll', () => {
           pageX: 10,
           pageY: 20,
           clientX: 5,
-          clientY: 10
+          clientY: 10,
         };
+        const scrollableContainer = { scrollBy: () => {} };
 
-        AutoScroll.initialize();
+        AutoScroll.initialize({ scrollableContainer });
         spyOn(AutoScroll.edgeDetector, "translateEventCoords");
         spyOn(AutoScroll.edgeDetector, "eventWithinThreshholdFromBottom");
         spyOn(AutoScroll.edgeDetector, "eventWithinThreshholdFromTop");
@@ -247,19 +190,29 @@ describe('AutoScroll', () => {
       });
 
       it("translates the event coordinates in the detector", () => {
-        expect(AutoScroll.edgeDetector.translateEventCoords).toHaveBeenCalledWith(event);
+        expect(
+          AutoScroll.edgeDetector.translateEventCoords
+        ).toHaveBeenCalledWith(event);
       });
       it("calls the bottom threshhold check for each scroll event", () => {
-        expect(AutoScroll.edgeDetector.eventWithinThreshholdFromBottom).toHaveBeenCalled();
+        expect(
+          AutoScroll.edgeDetector.eventWithinThreshholdFromBottom
+        ).toHaveBeenCalled();
       });
       it("calls the top threshhold check for each scroll event", () => {
-        expect(AutoScroll.edgeDetector.eventWithinThreshholdFromTop).toHaveBeenCalled();
+        expect(
+          AutoScroll.edgeDetector.eventWithinThreshholdFromTop
+        ).toHaveBeenCalled();
       });
       it("calls the left threshhold check for each scroll event", () => {
-        expect(AutoScroll.edgeDetector.eventWithinThreshholdFromLeft).toHaveBeenCalled();
+        expect(
+          AutoScroll.edgeDetector.eventWithinThreshholdFromLeft
+        ).toHaveBeenCalled();
       });
       it("calls the right threshhold check for each scroll event", () => {
-        expect(AutoScroll.edgeDetector.eventWithinThreshholdFromRight).toHaveBeenCalled();
+        expect(
+          AutoScroll.edgeDetector.eventWithinThreshholdFromRight
+        ).toHaveBeenCalled();
       });
     });
     describe("when the event is UNDEFINED", () => {
@@ -282,19 +235,29 @@ describe('AutoScroll', () => {
       });
 
       it("DOES NOT translate the event coordinates in the detector", () => {
-        expect(AutoScroll.edgeDetector.translateEventCoords).not.toHaveBeenCalled();
+        expect(
+          AutoScroll.edgeDetector.translateEventCoords
+        ).not.toHaveBeenCalled();
       });
       it("DOES NOT call the bottom threshhold check for each scroll event", () => {
-        expect(AutoScroll.edgeDetector.eventWithinThreshholdFromBottom).not.toHaveBeenCalled();
+        expect(
+          AutoScroll.edgeDetector.eventWithinThreshholdFromBottom
+        ).not.toHaveBeenCalled();
       });
       it("DOES NOT call the top threshhold check for each scroll event", () => {
-        expect(AutoScroll.edgeDetector.eventWithinThreshholdFromTop).not.toHaveBeenCalled();
+        expect(
+          AutoScroll.edgeDetector.eventWithinThreshholdFromTop
+        ).not.toHaveBeenCalled();
       });
       it("DOES NOT call the left threshhold check for each scroll event", () => {
-        expect(AutoScroll.edgeDetector.eventWithinThreshholdFromLeft).not.toHaveBeenCalled();
+        expect(
+          AutoScroll.edgeDetector.eventWithinThreshholdFromLeft
+        ).not.toHaveBeenCalled();
       });
       it("DOES NOT calls the right threshhold check for each scroll event", () => {
-        expect(AutoScroll.edgeDetector.eventWithinThreshholdFromRight).not.toHaveBeenCalled();
+        expect(
+          AutoScroll.edgeDetector.eventWithinThreshholdFromRight
+        ).not.toHaveBeenCalled();
       });
     });
   });
