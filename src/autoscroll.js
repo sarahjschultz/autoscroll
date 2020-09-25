@@ -1,8 +1,10 @@
 import EdgeDetector from "./edge-detector";
 
 const AutoScroll = {
-  initialize(options = {}) {
+  initialize(options = {}){
+    this.timerId = null;
     this.setScrollableContainer(options);
+    this.setRecursionDelay(options);
     this.setScrollDistance(options);
 
     this.edgeDetector = new EdgeDetector(options);
@@ -10,15 +12,20 @@ const AutoScroll = {
 
   // Container to scroll in autoScroll event
   // All offsets + threshholds measured from this
-  setScrollableContainer(options) {
+  setScrollableContainer(options){
     // Add guards for type before setting
-    this.scrollableContainer =
-      options.scrollableContainer || document.documentElement;
+    this.scrollableContainer = options.scrollableContainer || document.documentElement;
+  },
+
+  // Milliseconds
+  setRecursionDelay(options){
+    // Add guards for type before setting
+    this.recursionDelay = options.recursionDelay || 50;
   },
 
   // Distance autoScroller should increase scroll, each call
   // Measured in pixels
-  setScrollDistance(options) {
+  setScrollDistance(options){
     // Add guards for type before setting
     this.scrollDistance = options.scrollDistance || 10;
   },
@@ -29,6 +36,7 @@ const AutoScroll = {
     let scrollYBy = 0;
     let scrollXBy = 0;
 
+    clearInterval(self.timerId);
     // Event location in document coordinates
     self.edgeDetector.translateEventCoords(event);
 
@@ -52,13 +60,20 @@ const AutoScroll = {
       scrollXBy = self.scrollDistance;
     }
 
-    self.scrollableContainer.scrollBy(scrollXBy, scrollYBy);
+    clearInterval(self.timerId);
+    self.timerId = setTimeout(function scrollContainer() {
+      clearInterval(self.timerId);
+      self.scrollableContainer.scrollBy(scrollXBy, scrollYBy);
+      self.timerId = setTimeout(scrollContainer, self.recursionDelay);
+    }, self.recursionDelay);
   },
 
   reset() {
-    this.scrollableContainer = this.scrollDistance = null;
+    clearInterval(this.timerId);
+    this.timerId = null;
+    this.scrollableContainer = this.scrollDistance = this.recursionDelay = null;
     delete this.edgeDetector;
-  },
+  }
 };
 
 export default AutoScroll;
